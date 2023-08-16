@@ -1,0 +1,15 @@
+
+
+{{ .URL }}
+
+
+{{ $input := `fmt.Println("Hello World!")` }}
+{{ $input := readFile "static/dsa/lc/problems/coin-change/p1.cpp" }}
+
+{{ $lang := "cpp" }}
+
+<!-- {{ $options := dict "lineNos" "table" "style" "dracula" }} -->
+
+{{ transform.Highlight $input $lang  "lineNos=table, guessSyntax=true, style=monokai" }}
+
+

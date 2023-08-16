@@ -13,5 +13,5 @@ This is the content of the test page
 {{< code path="lc/problems/coin-change/p1.cpp" >}}
 {{< /highlight >}}
 
-<!-- {{ readFile "/about.md" }} -->
+
 

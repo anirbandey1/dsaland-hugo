@@ -3,7 +3,9 @@ languageCode = 'en-us'
 title = 'My New Hugo Site'
 
 
+
+
 [markup.highlight]
-  linenos=true
+  linenos = true
   codeFences = true
-  guessSyntax = false
+  guessSyntax = true
