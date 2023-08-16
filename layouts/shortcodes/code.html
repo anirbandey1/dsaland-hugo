@@ -1,0 +1,10 @@
+
+
+
+{{ $path := .Get "path" }}
+
+{{ $path := printf "static/dsa/%s" (.Get "path") }}
+
+{{ with os.ReadFile $path }}
+{{ . | safeHTML }}
+{{ end }}
