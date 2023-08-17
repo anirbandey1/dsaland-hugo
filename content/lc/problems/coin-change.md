@@ -1,7 +1,7 @@
 ---
 title: "Coin Change"
 date: 2023-08-17T10:10:17+05:30
-draft: true
+draft: false
 ---
 
 Category : Unbounded knapsack
