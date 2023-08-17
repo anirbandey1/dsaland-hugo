@@ -1,10 +1,44 @@
 
+{{ $url := .Page.RelPermalink }}
+
+<!-- {{ $path := .Get "path" }} -->
+<!-- {{ $path := printf "static/dsa/%s" (.Get "path") }} -->
+{{ $path := printf "static/dsa/%s/%s" ($url) (.Get "name" ) }}
+
+<!-- {{ $url }} -->
+<!-- {{ $path }} -->
 
 
-{{ $path := .Get "path" }}
+{{ $linestart := .Get "start" | default 0 }}
+{{ $num_of_lines := .Get "num" | default 200 }}
 
-{{ $path := printf "static/dsa/%s" (.Get "path") }}
+{{ $file := readFile $path }}
 
-{{ with os.ReadFile $path }}
-{{ . | safeHTML }}
-{{ end }}
+{{/* Splitting content by newline */}}
+{{ $file := split $file "\n" }}
+
+{{/* Limit the array/slice,  start from 2nd item then grab all first 3 item */}}
+{{ $file := first $num_of_lines (after $linestart $file) }}
+
+{{/* Delimit by newline */}}
+{{ $file := delimit $file "\n" }}
+
+<!-- {{ $file }} -->
+
+<!-- {{ $input := `fmt.Println("Hello World!")` }} -->
+<!-- {{ $input := readFile "static/dsa/lc/problems/coin-change/p1.cpp" }} -->
+<!-- {{ $input := readFile $path }} -->
+
+{{ $input := $file }}
+
+{{ $lang := "cpp" }}
+
+{{ $options := dict "lineNos" "table" "style" "dracula" }}
+
+{{ transform.Highlight $input $lang  "lineNos=table, guessSyntax=true, style=monokai" }}
+
+
+
+
+
+

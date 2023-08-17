@@ -8,10 +8,4 @@ This is the content of the test page
 
 
 
-{{< highlight cpp >}}
-
-{{< code path="lc/problems/coin-change/p1.cpp" >}}
-{{< /highlight >}}
-
-
 
