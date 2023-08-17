@@ -1,0 +1,3 @@
+[submodule "static/dsa"]
+	path = static/dsa
+	url = git@github.com:anirbandey1/dsa.git
