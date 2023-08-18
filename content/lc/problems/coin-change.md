@@ -1,5 +1,7 @@
 ---
 title: "Coin Change"
+number: "322"
+difficulty: "medium"
 date: 2023-08-17T10:10:17+05:30
 draft: false
 ---

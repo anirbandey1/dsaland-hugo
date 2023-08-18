@@ -1,15 +1,26 @@
 {{ define "main" }}
 
 
-<ul>
-    {{ range .Pages }}
-    <li> 
-        <a href="{{ .Permalink }}"> {{ .Title }} </a>
+<table>
+    <tr>
+        <th> No </th>
+        <th> Name </th>
+        <th> Difficulty </th>
+        <th> Solution </th>
+        <!-- <th> Link </th> -->
+    </tr>
 
-    </li> 
+    {{ range .Pages }}
+    <tr> 
+        <td> {{ .Params.number }} </td>
+        <td> {{ .Title }} </td>
+        <td> {{ .Params.difficulty }} </td>
+        <td> <a href="{{ .Permalink }}"> {{ .Permalink }} </a>
+
+    </tr> 
         
 
     {{ end }}
-</ul>
+</table>
 
 {{ end }}
