@@ -1,18 +1,14 @@
 {{define "main" }}
 
-<ul>
-    <li>
-        <a href="{{ .Site.BaseURL }}/lc/problems " >Leetcode problems</a> 
-    </li>
-    <li>
-        <a href="{{ .Site.BaseURL }}/gfg/problems " >GeekForGeeks problems</a>
-    </li>
-    <li>
-        <a href="{{ .Site.BaseURL }}/cf/contests " >Codeforces contests</a>
-    </li>
-    <li>
-        <a href="{{ .Site.BaseURL }}/at/contests " >Atcoder contests</a>
-    </li>
-</ul>
+<div class="probList" >
+   {{ partial "prob.html" (dict "name" "Leetcode problems" "href" (printf "%slc/problems" .Site.BaseURL)) }}
+
+   {{ partial "prob.html" (dict "name" "GeeksForGeeks problems" "href" (printf "%sgfg/problems" .Site.BaseURL)) }}
+
+   {{ partial "prob.html" (dict "name" "Codeforces contests" "href" (printf "%scf/contests" .Site.BaseURL)) }}
+
+   {{ partial "prob.html" (dict "name" "Atcoder contests" "href" (printf "%sat/problems" .Site.BaseURL)) }}
+
+</div>
 
 {{end}}
