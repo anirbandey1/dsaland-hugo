@@ -1,26 +1,30 @@
 {{ define "main" }}
 
 
-<table>
-    <tr>
-        <th> No </th>
-        <th> Name </th>
-        <th> Difficulty </th>
-        <th> Solution </th>
-        <!-- <th> Link </th> -->
-    </tr>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th> No </th>
+            <th> Name </th>
+            <th> Difficulty </th>
+            <th> Solution </th>
+        </tr>
+    </thead>
 
-    {{ range .Pages }}
-    <tr> 
-        <td> {{ .Params.number }} </td>
-        <td> {{ .Title }} </td>
-        <td> {{ .Params.difficulty }} </td>
-        <td> <a href="{{ .Permalink }}"> {{ .Permalink }} </a>
+    <tbody>
+        {{ range .Pages }}
+        <tr>
+            <td> {{ .Params.number }} </td>
+            <td> {{ .Title }} </td>
+            <td> {{ .Params.difficulty }} </td>
+            <td> <a href="{{ .Permalink }}"> link </a> </td>
 
-    </tr> 
-        
+        </tr>
 
-    {{ end }}
+        {{ end }}
+
+    </tbody>
+
 </table>
 
 {{ end }}
