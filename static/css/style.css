@@ -29,7 +29,9 @@ a, a:visited, a:hover, a:active, a:focus {
   margin: 25px 0;
   min-width: 400px;
   font-size: 1.1em;
-
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 0 20 rgba(0,0,0,0.15);
+  box-shadow: 0 0 20 rgba(255,255,255,0.15);
 
 }
 

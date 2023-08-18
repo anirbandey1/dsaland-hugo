@@ -7,6 +7,7 @@
             <th> No </th>
             <th> Name </th>
             <th> Difficulty </th>
+            <th> Problem </th>
             <th> Solution </th>
         </tr>
     </thead>
@@ -17,6 +18,7 @@
             <td> {{ .Params.number }} </td>
             <td> {{ .Title }} </td>
             <td> {{ .Params.difficulty }} </td>
+            <td> <a href="{{ .Permalink }}"> link </a> </td>
             <td> <a href="{{ .Permalink }}"> link </a> </td>
 
         </tr>
