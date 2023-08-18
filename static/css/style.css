@@ -110,12 +110,12 @@ h1 {
   border: 2px solid #aaa;
 }
 
-header {
+.header {
   position: sticky;
   bottom: 100%;
 }
 
-footer {
+.footer {
   position: sticky;
   top: 100%;
 
