@@ -7,8 +7,6 @@ draft: false
 ---
 
 
-Create undirected graph from the list
-
-
+The following solution got stuck at 120/162 test cases
 
 {{< code name="p1.cpp" start=67 num=80  >}}
