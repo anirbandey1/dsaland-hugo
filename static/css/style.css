@@ -72,4 +72,7 @@ a, a:visited, a:hover, a:active, a:focus {
   color: darkblue;
 }
 
+.code-block {
+  font-size: 1.4em;
 
+}
