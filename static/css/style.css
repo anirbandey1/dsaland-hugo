@@ -60,7 +60,8 @@ h1 {
 
 .content-table thead tr {
   /* background-color: #009879; */
-  background-color: #009879;
+  /* background-color: #009879; */
+  background-color: #008261;
   color: white;
   text-align: left;
   font-weight: bold;
@@ -73,15 +74,17 @@ h1 {
 }
 
 .content-table tbody tr {
-  background-color: #ddd;
-  color: black;
+  /* background-color: #ddd; */
+  background-color: #2a2f31;
+  color: white;
   border-bottom: 1px solid white;
 }
 
 .content-table tbody tr:nth-of-type(even) {
   /* background-color: #f3f3f3; */
-  background-color: #f0f0f0;
-  color: black;
+  /* background-color: #f0f0f0; */
+  background-color: #1f2325;
+  color: white;
 }
 
 
@@ -90,7 +93,8 @@ h1 {
 }
 
 .content-table a {
-  color: darkblue;
+  /* color: darkblue; */
+  color: #729fff;
 }
 
 .code-block {
