@@ -5,7 +5,8 @@
 
 <!-- {{ $path := .Get "path" }} -->
 <!-- {{ $path := printf "static/dsa/%s" (.Get "path") }} -->
-{{ $path := printf "static/dsa/%s/%s" ($url) (.Get "name" ) }}
+{{ $path := printf "content%s%s" ($url) (.Get "name" ) }}
+
 
 <!-- {{ $url }} -->
 <!-- {{ $path }} -->
