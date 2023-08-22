@@ -3,27 +3,42 @@
 {{ $type := .Type }}
 {{ $platform := .Params.Platform }}
 
-{{ if eq $type "problems" }}
 <table class="content-table">
     <thead>
         <tr>
+            {{ if eq $type "problems" }}
             <th> No </th>
             <th> Name </th>
             <th> Difficulty </th>
             <th> Problem </th>
             <th> Solution </th>
+
+            {{ else if eq $type "contests" }}
+            <th> No </th>
+            <th> Name </th>
+            <th> Date </th>
+            <th> Participate </th>
+            <th> Problems </th>
+
+            {{ else }}
+            Unknown type
+
+            {{ end }}
         </tr>
     </thead>
 
     <tbody>
         {{ range .Pages }}
         <tr>
+            {{ $base := path.Base .RelPermalink }}
+            {{ $problemlink := "" }}
+            {{ $visitlink := "" }}
+
+            {{ if eq $type "problems" }}
             <td> {{ .Params.number }} </td>
             <td> {{ .Title }} </td>
             <td> {{ .Params.difficulty }} </td>
 
-            {{ $problemlink := "" }}
-            {{ $base := path.Base .RelPermalink }}
             {{ if eq $platform "leetcode" }}
                 {{ $problemlink = printf "%s/%s" "https://leetcode.com/problems" $base }}
             {{ else if eq $platform  "gfg" }}
@@ -35,6 +50,29 @@
             <td> <a href="{{ $problemlink }}" target="_blank"> link </a> </td>
             
             <td> <a href="{{ .Permalink }}"> link </a> </td>
+            {{ else if eq $type "contests" }}
+
+
+            <td> {{ .Params.number }} </td>
+            <td> {{ .Title }} </td>
+            <td> {{ .Params.StartDate }} </td>
+
+            {{ if eq $platform "leetcode" }}
+                {{ $visitlink = printf "%s/%s" "https://leetcode.com/problems" $base }}
+            {{ else if eq $platform  "gfg" }}
+                {{ $visitlink = printf "%s/%s%s" "https://practice.geeksforgeeks.org/problems" $base "/1" }}
+            {{ else if eq $platform  "codeforces" }}
+                {{ $visitlink = printf "%s/%s%s" "https://codeforces.com/contest" $base "" }}
+            {{ else }}
+                {{ $visitlink = .Permalink }}
+
+            {{ end }}
+            <td> <a href="{{ $visitlink }}" target="_blank"> link </a> </td>
+            
+            <td> <a href="{{ .Permalink }}"> link </a> </td>
+
+
+            {{ end }}
 
         </tr>
 
@@ -44,12 +82,5 @@
 
 </table>
 
-{{ else }}
-
-Undefined Type
-Please define the type of page in the metadata
-
-
-{{ end }}
 
 {{ end }}
