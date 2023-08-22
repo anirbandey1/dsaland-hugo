@@ -1,6 +1,9 @@
 {{ define "main" }}
 
+{{ $type := .Type }}
+{{ $platform := .Params.Platform }}
 
+{{ if eq $type "problems" }}
 <table class="content-table">
     <thead>
         <tr>
@@ -18,7 +21,19 @@
             <td> {{ .Params.number }} </td>
             <td> {{ .Title }} </td>
             <td> {{ .Params.difficulty }} </td>
-            <td> <a href="{{ .Permalink }}"> link </a> </td>
+
+            {{ $problemlink := "" }}
+            {{ $base := path.Base .RelPermalink }}
+            {{ if eq $platform "leetcode" }}
+                {{ $problemlink = printf "%s/%s" "https://leetcode.com/problems" $base }}
+            {{ else if eq $platform  "gfg" }}
+                {{ $problemlink = printf "%s/%s%s" "https://practice.geeksforgeeks.org/problems" $base "/1" }}
+            {{ else }}
+                {{ $problemlink = .Permalink }}
+
+            {{ end }}
+            <td> <a href="{{ $problemlink }}" target="_blank"> link </a> </td>
+            
             <td> <a href="{{ .Permalink }}"> link </a> </td>
 
         </tr>
@@ -28,5 +43,13 @@
     </tbody>
 
 </table>
+
+{{ else }}
+
+Undefined Type
+Please define the type of page in the metadata
+
+
+{{ end }}
 
 {{ end }}
