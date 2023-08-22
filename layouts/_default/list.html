@@ -1,7 +1,24 @@
 {{ define "main" }}
 
+{{/*
 {{ $type := .Type }}
 {{ $platform := .Params.Platform }}
+
+*/}}
+
+{{ $url_core := split .RelPermalink "/" }}
+
+{{ $platform :=  index $url_core 1 }}
+{{ $type :=  index $url_core 2 }}
+{{ $contest_name := index $url_core 3 }}
+
+{{/*
+{{ $url_core }}
+{{ $platform }}
+{{ $type }}
+*/}}
+
+
 
 <table class="content-table">
     <thead>
@@ -13,12 +30,19 @@
             <th> Problem </th>
             <th> Solution </th>
 
-            {{ else if eq $type "contests" }}
+            {{ else if and (eq $type "contests") (eq $contest_name "" ) }}
             <th> No </th>
             <th> Name </th>
             <th> Date </th>
             <th> Participate </th>
             <th> Problems </th>
+            {{ else if and (eq $type "contests") (ne $contest_name "" )}}
+
+            <th> No </th>
+            <th> Name </th>
+            <th> Difficulty </th>
+            <th> Problem </th>
+            <th> Solution </th>
 
             {{ else }}
             Unknown type
@@ -31,48 +55,72 @@
         {{ range .Pages }}
         <tr>
             {{ $base := path.Base .RelPermalink }}
-            {{ $problemlink := "" }}
+            {{ $number := .Params.number }}
             {{ $visitlink := "" }}
 
+            {{/* Problems  */}}
             {{ if eq $type "problems" }}
-            <td> {{ .Params.number }} </td>
+            <td> {{ $number }} </td>
             <td> {{ .Title }} </td>
             <td> {{ .Params.difficulty }} </td>
 
-            {{ if eq $platform "leetcode" }}
-                {{ $problemlink = printf "%s/%s" "https://leetcode.com/problems" $base }}
-            {{ else if eq $platform  "gfg" }}
-                {{ $problemlink = printf "%s/%s%s" "https://practice.geeksforgeeks.org/problems" $base "/1" }}
-            {{ else }}
-                {{ $problemlink = .Permalink }}
-
-            {{ end }}
-            <td> <a href="{{ $problemlink }}" target="_blank"> link </a> </td>
-            
-            <td> <a href="{{ .Permalink }}"> link </a> </td>
-            {{ else if eq $type "contests" }}
-
-
-            <td> {{ .Params.number }} </td>
-            <td> {{ .Title }} </td>
-            <td> {{ .Params.StartDate }} </td>
-
-            {{ if eq $platform "leetcode" }}
+            {{ if eq $platform "lc" }}
                 {{ $visitlink = printf "%s/%s" "https://leetcode.com/problems" $base }}
             {{ else if eq $platform  "gfg" }}
                 {{ $visitlink = printf "%s/%s%s" "https://practice.geeksforgeeks.org/problems" $base "/1" }}
-            {{ else if eq $platform  "codeforces" }}
+            {{ else }}
+                {{ $visitlink = .Permalink }}
+
+            {{ end }}
+
+            {{/* A contest */}}
+            {{ else if and (eq $type "contests") (eq $contest_name "" ) }}
+
+
+            <td> {{ $number }} </td>
+            <td> {{ .Title }} </td>
+            <td> {{ .Params.StartDate }} </td>
+
+            {{ if eq $platform "lc" }}
+                {{ $visitlink = printf "%s/%s" "https://leetcode.com/problems" $base }}
+            {{ else if eq $platform  "gfg" }}
+                {{ $visitlink = printf "%s/%s%s" "https://practice.geeksforgeeks.org/problems" $base "/1" }}
+            {{ else if eq $platform  "cf" }}
                 {{ $visitlink = printf "%s/%s%s" "https://codeforces.com/contest" $base "" }}
             {{ else }}
                 {{ $visitlink = .Permalink }}
 
             {{ end }}
+
+            {{/* Inside a contest */}}
+            {{ else if and (eq $type "contests") (ne $contest_name "" ) }}
+
+            {{ if eq $platform "cf" }}
+                {{ $number = (upper $base) }}
+            {{ end }}
+
+            <td> {{ $number }} </td>
+            <td> {{ .Title }} </td>
+            <td> {{ .Params.StartDate }} </td>
+
+            {{ if eq $platform "lc" }}
+                {{ $visitlink = printf "%s/%s" "https://leetcode.com/problems" $base }}
+            {{ else if eq $platform  "gfg" }}
+                {{ $visitlink = printf "%s/%s%s" "https://practice.geeksforgeeks.org/problems" $base "/1" }}
+            {{ else if eq $platform  "cf" }}
+                {{ $visitlink = printf "%s/%s/problem/%s" "https://codeforces.com/contest" $contest_name $base }}
+            {{ else }}
+                {{ $visitlink = .Permalink }}
+
+            {{ end }}
+
+            {{ else }}
+            Unknown 
+            {{ end }}
+
             <td> <a href="{{ $visitlink }}" target="_blank"> link </a> </td>
             
             <td> <a href="{{ .Permalink }}"> link </a> </td>
-
-
-            {{ end }}
 
         </tr>
 
